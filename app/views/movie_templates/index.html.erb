@@ -6,11 +6,11 @@
 
   <div>
     <label for="title_field">Title</label>
-    <input id = "title_field" type = "text">
+    <input id = "title_field" type = "text" name = "the_title">
   </div>
   <div>
-    <label for="">Year</label>
-    <input id = "year_field" type = "text" name = "the_title">
+    <label for="year_field">Year</label>
+    <input id = "year_field" type = "text" name = "the_year">
   </div>
   <div>
     <label for="duration_field">Duration</label>
@@ -85,7 +85,11 @@
 
           <% the_director = matching_directors.at(0) %>
 
-          <%= the_director.name %>
+          <% if the_director == nil %>
+            Uh oh! We weren't able to find a director for this movie.
+          <%else %>
+            <%= the_director.name %>
+          <% end %>
         </td>
 
         <td>
