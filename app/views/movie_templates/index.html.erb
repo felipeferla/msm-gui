@@ -2,65 +2,97 @@
   List of all movies
 </h1>
 
-<hr>
+<form action= "/insert_movie_record" method = "post">
 
-<table border="1">
-  <tr>
-    <th>
-      ID
-    </th>
+  <div>
+    <label for="title_field">Title</label>
+    <input id = "title_field" type = "text">
+  </div>
+  <div>
+    <label for="">Year</label>
+    <input id = "year_field" type = "text" name = "the_title">
+  </div>
+  <div>
+    <label for="duration_field">Duration</label>
+    <input id = "duration_field" type = "text" name = "the_duration">
+  </div>
+  <div>
+    <label for="description_field">Description</label>
+    <input id = "description_field" type = "text"name = "the_description" >
+  </div>
+  <div>
+    <label for="image_field">Image</label>
+    <input id = "image_field" type = "text" name = "the_image">
+  </div>
+  <div>
+    <label for="director_field">Director ID</label>
+    <input id = "director_field" type = "text" name = "the_director_id">
+  </div>
 
-    <th>
-      Image
-    </th>
+  <button>
+    Create movie
+  </button>
 
-    <th>
-      Title
-    </th>
+  <br>
+  <hr>
 
-    <th>
-      Year
-    </th>
+  <table border="1">
+    <tr>
+      <th>
+        ID
+      </th>
 
-    <th>
-      Director
-    </th>
+      <th>
+        Image
+      </th>
 
-    <th>
-    </th>
-  </tr>
+      <th>
+        Title
+      </th>
 
-  <% @list_of_movies.each do |a_movie| %>
-  <tr>
-    <td>
-      <%= a_movie.id %>
-    </td>
+      <th>
+        Year
+      </th>
 
-    <td>
-      <img src="<%= a_movie.image %>" style="width:250px;">
-    </td>
+      <th>
+        Director
+      </th>
 
-    <td>
-      <%= a_movie.title %>
-    </td>
+      <th>
+      </th>
+    </tr>
 
-    <td>
-      <%= a_movie.year %>
-    </td>
+    <% @list_of_movies.each do |a_movie| %>
+      <tr>
+        <td>
+          <%= a_movie.id %>
+        </td>
 
-    <td>
-      <% matching_directors = Director.where({ :id => a_movie.director_id }) %>
-      
-      <% the_director = matching_directors.at(0) %>
+        <td>
+          <img src="<%= a_movie.image %>" style="width:250px;">
+        </td>
 
-      <%= the_director.name %>
-    </td>
+        <td>
+          <%= a_movie.title %>
+        </td>
 
-    <td>
-      <a href="/movies/<%= a_movie.id %>">
-        Show details
-      </a>
-    </td>
-  </tr>
-  <% end %>
-</table>
+        <td>
+          <%= a_movie.year %>
+        </td>
+
+        <td>
+          <% matching_directors = Director.where({ :id => a_movie.director_id }) %>
+
+          <% the_director = matching_directors.at(0) %>
+
+          <%= the_director.name %>
+        </td>
+
+        <td>
+          <a href="/movies/<%= a_movie.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+    <% end %>
+  </table>
