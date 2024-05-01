@@ -1,4 +1,43 @@
 class DirectorsController < ApplicationController
+  def create
+    #Parameters: {"the_name"=>"", "the_dob"=>"", "the_bio"=>"", "the_image"=>""}
+    a = Director.new
+    a.name = params.fetch("the_name")
+    a.dob = params.fetch("the_dob")
+    a.bio = params.fetch("the_bio")
+    a.image = params.fetch("the_image")
+    a.save
+
+    redirect_to("/directors")
+  end
+
+  
+  def destroy
+    the_id = params.fetch("an_id")
+    matching_records = Director.where({:id => the_id})
+    the_director = matching_records.at(0)
+    the_director.destroy
+  
+    redirect_to("/directors")
+  end
+
+
+  def update
+    the_director_id = params.fetch("the_id")
+    the_director = Director.where(:id => the_director_id).first
+    the_director.name = params.fetch("the_name")
+    the_director.dob = params.fetch("the_dob")
+    the_director.bio = params.fetch("the_bio")
+    the_director.image = params.fetch("the_image")
+    the_director.save
+
+    redirect_to("_directors")
+  end
+
+
+
+
+
   def index
     matching_directors = Director.all
     @list_of_directors = matching_directors.order({ :created_at => :desc })
