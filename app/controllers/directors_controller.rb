@@ -31,10 +31,9 @@ class DirectorsController < ApplicationController
     the_director.image = params.fetch("the_image")
     the_director.save
 
-    redirect_to("_directors")
+    redirect_to("/directors/#{the_director_id}", allow_other_host: true)
+
   end
-
-
 
 
 
